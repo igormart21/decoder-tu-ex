@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decoder de tu Ex — ¡Bienvenido al Decoder!</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080608;
+  --surface: #110e12;
+  --surface2: #1a161b;
+  --white: #f0eaf5;
+  --cream: #e2daea;
+  --muted: #7a6f82;
+  --dim: #3d3545;
+  --accent: #9b3fd4;
+  --accent-dim: rgba(155, 63, 212, 0.18);
+  --accent-glow: rgba(155, 63, 212, 0.35);
+  --gold: #c9a84c;
+  --green: #2ecc71;
+  --green-dim: rgba(46, 204, 113, 0.15);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(8,6,8,0.95), transparent);
+}
+
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--white);
+}
+.logo span { color: var(--accent); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  70% { transform: scale(1.15) rotate(3deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-orb {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse at center, rgba(46, 204, 113, 0.12) 0%, var(--accent-dim) 40%, transparent 70%);
+  pointer-events: none;
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.check-icon {
+  width: 80px; height: 80px;
+  background: var(--green-dim);
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  margin: 0 auto 32px;
+  opacity: 0;
+  animation: checkPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.8s forwards;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 8vw, 88px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1.0s forwards;
+}
+h1 em { font-style: italic; color: var(--accent); display: block; }
+
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-style: italic;
+  color: var(--cream);
+  margin: 20px 0 16px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1.2s forwards;
+}
+
+.hero-desc {
+  max-width: 480px;
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 52px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1.4s forwards;
+}
+
+/* CTA BUTTON */
+.btn-telegram {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 18px 48px;
+  border-radius: 2px;
+  box-shadow: 0 0 50px var(--accent-glow);
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 1.6s forwards;
+}
+.btn-telegram:hover { transform: translateY(-3px); box-shadow: 0 10px 70px var(--accent-glow); opacity: 0.9; }
+
+.section-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 40px;
+  display: block;
+}
+
+h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 4.5vw, 52px);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+h2 em { font-style: italic; color: var(--accent); }
+
+/* STEPS */
+.steps-section {
+  padding: 100px 24px;
+  max-width: 660px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.steps { margin-top: 60px; display: flex; flex-direction: column; gap: 0; }
+
+.step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 24px;
+  text-align: left;
+  padding: 32px 0;
+  border-top: 1px solid var(--dim);
+}
+.step:last-child { border-bottom: 1px solid var(--dim); }
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  opacity: 0.5;
+}
+
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.step-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+.step-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.step-link:hover { opacity: 0.8; }
+
+/* TIPS */
+.tips-section {
+  padding: 80px 24px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1px;
+  margin-top: 60px;
+  background: var(--dim);
+}
+
+.tip-card {
+  background: var(--surface);
+  padding: 32px 24px;
+  text-align: left;
+  transition: background 0.2s;
+}
+.tip-card:hover { background: var(--surface2); }
+
+.tip-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+
+.tip-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.tip-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* MESSAGE EXAMPLE */
+.example-section {
+  padding: 80px 24px;
+  max-width: 580px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.chat-window {
+  background: var(--surface);
+  border: 1px solid var(--dim);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 48px;
+  text-align: left;
+}
+
+.chat-header {
+  background: var(--surface2);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--dim);
+}
+
+.avatar {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+
+.ch-name { font-size: 14px; font-weight: 500; }
+.ch-status { font-size: 12px; color: #5cb85c; }
+
+.chat-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+.msg {
+  max-width: 82%;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 14px;
+}
+
+.msg-user {
+  align-self: flex-end;
+  background: var(--surface2);
+  color: var(--cream);
+  border-bottom-right-radius: 4px;
+}
+
+.msg-bot {
+  align-self: flex-start;
+  background: #1e0f2e;
+  border: 1px solid #3d1a5e;
+  color: var(--cream);
+  border-bottom-left-radius: 4px;
+}
+
+.msg-bot-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+/* CONFIRMATION CARD */
+.confirm-section {
+  padding: 60px 24px 100px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.confirm-card {
+  background: var(--surface);
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  border-radius: 16px;
+  padding: 40px 36px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(46, 204, 113, 0.08);
+}
+
+.confirm-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+
+.confirm-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.confirm-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.confirm-list li {
+  font-size: 14px;
+  color: var(--cream);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirm-list li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+footer {
+  padding: 24px 40px;
+  border-top: 1px solid var(--dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copy { font-size: 12px; color: var(--dim); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 12px; color: var(--dim); text-decoration: none; }
+.footer-links a:hover { color: var(--muted); }
+
+@media (max-width: 600px) {
+  nav { padding: 16px 20px; }
+  .confirm-card { padding: 32px 20px; }
+  .step { grid-template-columns: 40px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Decoder<span>.</span>ex</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb"></div>
+  <div class="check-icon">✓</div>
+  <p class="eyebrow">Pago confirmado · Acceso activado</p>
+  <h1>Bienvenido<em>al Decoder.</em></h1>
+  <p class="hero-tagline">Ya nunca más leerás sus mensajes igual.</p>
+  <p class="hero-desc">Tu acceso está activo. En menos de un minuto vas a estar dentro del bot y listo para analizar el primer mensaje.</p>
+  <a href="https://t.me/DecoderTuExBot" class="btn-telegram">
+    <span>🔮</span> Abrir el bot en Telegram
+  </a>
+</section>
+
+<!-- STEPS -->
+<section class="steps-section">
+  <span class="section-label">Empieza ahora</span>
+  <h2>Tres pasos.<em>Ya estás dentro.</em></h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <div class="step-title">Abre el bot en Telegram</div>
+        <p class="step-desc">Haz clic en el botón de arriba o busca <strong style="color:var(--cream);">@DecoderTuExBot</strong> en Telegram. Presiona "Iniciar" para activar tu acceso.</p>
+        <a href="https://t.me/DecoderTuExBot" class="step-link">→ Ir al bot ahora</a>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <div class="step-title">Pega el mensaje de tu ex</div>
+        <p class="step-desc">Sin formatos especiales. Solo copia exactamente lo que ella te escribió — un mensaje, varios, o una conversación completa — y pégalo en el chat.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <div class="step-title">Recibe el análisis en segundos</div>
+        <p class="step-desc">La IA detecta las emociones detrás de las palabras, las señales ocultas y te entrega la respuesta exacta que debes enviarle. Lista para copiar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="example-section">
+  <span class="section-label">Así se ve el análisis</span>
+  <h2>Tu primer análisis<em>en acción</em></h2>
+
+  <div class="chat-window">
+    <div class="chat-header">
+      <div class="avatar">🔮</div>
+      <div>
+        <div class="ch-name">Decoder de tu Ex</div>
+        <div class="ch-status">● En línea</div>
+      </div>
+    </div>
+    <div class="chat-body">
+      <div class="msg msg-user">
+        Ella me escribió: "Ok, supongo que estás muy ocupado... no importa."
+      </div>
+      <div class="msg msg-bot">
+        <div class="msg-bot-label">🔍 Análisis emocional</div>
+        Este mensaje tiene múltiples capas. Superficialmente es indiferencia, pero la estructura revela algo muy diferente.
+      </div>
+      <div class="msg msg-bot">
+        <div class="msg-bot-label">💡 Lo que realmente dice</div>
+        <strong style="color:var(--cream);">Ella esperaba algo de ti y no lo recibió.</strong> El "no importa" no es resignación — es una invitación disfrazada. Está midiendo si reaccionas.
+      </div>
+      <div class="msg msg-bot">
+        <div class="msg-bot-label">✉️ Respuesta recomendada</div>
+        <em style="color:var(--cream);">"Tienes razón, no debí dejarte esperando. ¿Hablamos esta noche?"</em><br><br>
+        <span style="font-size:13px; color:var(--muted);">Reconoces sin excusarte en exceso. Propones acción concreta. Corto y directo al punto.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="tips-section">
+  <span class="section-label">Para aprovechar al máximo</span>
+  <h2>Tips para<em>mejores resultados</em></h2>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <span class="tip-icon">📋</span>
+      <div class="tip-title">Pega el mensaje exacto</div>
+      <p class="tip-desc">Copia el texto sin editarlo ni resumirlo. Cada palabra, cada punto, cada emoji importa para el análisis.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">💬</span>
+      <div class="tip-title">Puedes pegar conversaciones</div>
+      <p class="tip-desc">No solo un mensaje. Si tienes una conversación completa, pégala entera. Más contexto, análisis más preciso.</p>
+    </div>
+    <div class="tip-card">
+      <span class="tip-icon">⏱️</span>
+      <div class="tip-title">Úsalo antes de responder</div>
+      <p class="tip-desc">El momento ideal es justo cuando recibes el mensaje y antes de responder. No después de haber cometido el error.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONFIRM CARD -->
+<section class="confirm-section">
+  <div class="confirm-card">
+    <div class="confirm-title">Tu acceso incluye</div>
+    <p class="confirm-desc">Todo lo que necesitas para no volver a adivinar nunca más.</p>
+    <ul class="confirm-list">
+      <li>Análisis ilimitados de mensajes</li>
+      <li>Detección de emociones con porcentajes</li>
+      <li>Respuesta estratégica lista para copiar</li>
+      <li>Análisis de conversaciones completas</li>
+      <li>Disponible 24/7 en Telegram</li>
+      <li>Garantía de 7 días — sin preguntas</li>
+    </ul>
+    <a href="https://t.me/DecoderTuExBot" class="btn-telegram" style="display:inline-flex; opacity:1; animation:none;">
+      <span>🔮</span> Ir al bot ahora
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Decoder<span>.</span>ex</div>
+  <div class="footer-copy">© 2025 Decoder de tu Ex. Todos los derechos reservados.</div>
+  <div class="footer-links">
+    <a href="#">Privacidad</a>
+    <a href="#">Términos</a>
+    <a href="#">Contacto</a>
+  </div>
+</footer>
+
+</body>
+</html>
