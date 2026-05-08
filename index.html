@@ -320,6 +320,10 @@ h2 em { font-style: italic; color: var(--accent); }
   position: relative;
   padding: 14px 10px 20px;
   text-align: left;
+  /* altura fixa — celular não expande */
+  height: 660px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Side buttons */
@@ -443,16 +447,24 @@ h2 em { font-style: italic; color: var(--accent); }
   border-radius: 32px;
   overflow: hidden;
   position: relative;
+  flex: 1; /* ocupa o espaço restante dentro do phone-frame */
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* essencial para flex filho respeitar overflow */
 }
 
 .sim-phone {
   background: transparent;
   border: none;
   border-radius: 0;
-  overflow: visible;
+  overflow: hidden;
   box-shadow: none;
   text-align: left;
   position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .sim-header {
@@ -493,12 +505,19 @@ h2 em { font-style: italic; color: var(--accent); }
 .sim-dot.active { background: var(--accent); }
 
 .sim-body {
-  padding: 24px 20px;
+  padding: 16px 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 420px;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  scroll-behavior: smooth;
 }
+
+/* esconder scrollbar mas manter scroll */
+.sim-body::-webkit-scrollbar { width: 0; }
+.sim-body { scrollbar-width: none; }
 
 .sim-msg {
   max-width: 85%;
@@ -738,7 +757,7 @@ h2 em { font-style: italic; color: var(--accent); }
 @media (max-width: 720px) {
   .sim-scene { flex-direction: column; align-items: center; }
   .sim-side-panel { max-width: 320px; width: 100%; }
-  .phone-frame { width: 300px; }
+  .phone-frame { width: 300px; height: 600px; }
 }
 
 /* ===== BENEFITS ===== */
