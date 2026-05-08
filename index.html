@@ -292,18 +292,165 @@ h2 em { font-style: italic; color: var(--accent); }
 /* ===== CHAT SIMULATION ===== */
 .sim-section {
   padding: 80px 24px;
-  max-width: 680px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
 
-.sim-phone {
+.sim-scene {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
   margin-top: 48px;
+}
+
+/* PHONE FRAME */
+.phone-frame {
+  flex-shrink: 0;
+  width: 320px;
+  background: #0e0b12;
+  border-radius: 44px;
+  border: 2px solid #2a2030;
+  box-shadow:
+    0 0 0 6px #100c16,
+    0 0 0 8px #1e1826,
+    0 60px 140px rgba(0,0,0,0.8),
+    0 0 80px rgba(155,63,212,0.12);
+  position: relative;
+  padding: 14px 10px 20px;
+  text-align: left;
+}
+
+/* Side buttons */
+.phone-frame::before {
+  content: '';
+  position: absolute;
+  right: -10px;
+  top: 90px;
+  width: 4px;
+  height: 56px;
+  background: #1e1826;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 0 70px 0 #1e1826;
+}
+.phone-frame::after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 80px;
+  width: 4px;
+  height: 36px;
+  background: #1e1826;
+  border-radius: 3px 0 0 3px;
+  box-shadow: 0 52px 0 #1e1826, 0 96px 0 #1e1826;
+}
+
+/* Status bar */
+.phone-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 14px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.phone-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+
+.phone-signal {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 10px;
+}
+.phone-signal span {
+  width: 3px;
+  background: var(--cream);
+  border-radius: 1px;
+}
+.phone-signal span:nth-child(1) { height: 30%; }
+.phone-signal span:nth-child(2) { height: 55%; }
+.phone-signal span:nth-child(3) { height: 80%; }
+.phone-signal span:nth-child(4) { height: 100%; }
+
+.phone-battery {
+  width: 20px;
+  height: 10px;
+  border: 1.5px solid var(--cream);
+  border-radius: 2px;
+  position: relative;
+}
+.phone-battery::before {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 5px;
+  background: var(--cream);
+  border-radius: 0 1px 1px 0;
+}
+.phone-battery::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  bottom: 2px;
+  width: 70%;
+  background: #5cb85c;
+  border-radius: 1px;
+}
+
+/* Notch */
+.phone-notch {
+  width: 100px;
+  height: 26px;
+  background: #0e0b12;
+  border-radius: 0 0 18px 18px;
+  margin: -8px auto 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+.notch-cam {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #1a1520;
+  border: 1px solid #2a2030;
+}
+
+.notch-speaker {
+  width: 40px; height: 4px;
+  background: #1a1520;
+  border-radius: 2px;
+}
+
+/* Inner screen */
+.phone-screen {
   background: var(--surface);
-  border: 1px solid var(--dim);
-  border-radius: 20px;
+  border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(155,63,212,0.15);
+  position: relative;
+}
+
+.sim-phone {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
   text-align: left;
   position: relative;
 }
@@ -499,6 +646,76 @@ h2 em { font-style: italic; color: var(--accent); }
   flex-shrink: 0;
 }
 
+/* SIDE PANEL */
+.sim-side-panel {
+  flex: 1;
+  max-width: 280px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sim-side-title {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.sim-side-scenarios {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sim-scene-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--surface);
+  border: 1px solid var(--dim);
+  border-radius: 8px;
+  padding: 14px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+
+.sim-scene-btn:hover { border-color: rgba(155,63,212,0.4); background: var(--surface2); }
+.sim-scene-btn.active { border-color: var(--accent); background: rgba(155,63,212,0.08); }
+
+.scene-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.5;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.sim-scene-btn.active .scene-num { opacity: 1; }
+
+.scene-label {
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.sim-scene-btn.active .scene-label { color: var(--cream); }
+
+.sim-side-note {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.7;
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+}
+
 .sim-next-btn {
   margin-top: 24px;
   display: inline-flex;
@@ -517,6 +734,12 @@ h2 em { font-style: italic; color: var(--accent); }
   transition: border-color 0.2s, color 0.2s;
 }
 .sim-next-btn:hover { border-color: var(--accent); color: var(--white); }
+
+@media (max-width: 720px) {
+  .sim-scene { flex-direction: column; align-items: center; }
+  .sim-side-panel { max-width: 320px; width: 100%; }
+  .phone-frame { width: 300px; }
+}
 
 /* ===== BENEFITS ===== */
 .benefits-section {
@@ -1079,28 +1302,81 @@ footer {
   <span class="section-label" style="display:block; text-align:center;">Ve cómo funciona</span>
   <h2 style="text-align:center;">Análisis real.<em>En segundos.</em></h2>
 
-  <div class="sim-phone">
-    <div class="sim-header">
-      <div class="sim-header-left">
-        <div class="sim-avatar">🔮</div>
-        <div>
-          <div class="sim-name">Decoder de tu Ex</div>
-          <div class="sim-status">● Analizando...</div>
+  <div class="sim-scene">
+
+    <!-- PHONE -->
+    <div class="phone-frame">
+      <div class="phone-status">
+        <span id="phoneTime">9:41</span>
+        <div class="phone-status-icons">
+          <div class="phone-signal">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <span style="font-size:10px;">5G</span>
+          <div class="phone-battery"></div>
         </div>
       </div>
-      <div class="sim-scenario-dots">
-        <div class="sim-dot active" onclick="goScenario(0)"></div>
-        <div class="sim-dot" onclick="goScenario(1)"></div>
-        <div class="sim-dot" onclick="goScenario(2)"></div>
+
+      <div class="phone-notch">
+        <div class="notch-cam"></div>
+        <div class="notch-speaker"></div>
+        <div class="notch-cam"></div>
+      </div>
+
+      <div class="phone-screen">
+        <div class="sim-phone">
+          <div class="sim-header">
+            <div class="sim-header-left">
+              <div class="sim-avatar">🔮</div>
+              <div>
+                <div class="sim-name">Decoder de tu Ex</div>
+                <div class="sim-status" id="simStatus">● En línea</div>
+              </div>
+            </div>
+            <div class="sim-scenario-dots">
+              <div class="sim-dot active" onclick="goScenario(0)"></div>
+              <div class="sim-dot" onclick="goScenario(1)"></div>
+              <div class="sim-dot" onclick="goScenario(2)"></div>
+            </div>
+          </div>
+
+          <div class="sim-body" id="simBody"></div>
+
+          <div class="sim-footer">
+            <div class="sim-input-fake">Pega el mensaje de tu ex...</div>
+            <div class="sim-send">➤</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Home bar -->
+      <div style="height:20px; display:flex; align-items:center; justify-content:center; margin-top:8px;">
+        <div style="width:100px; height:4px; background:#2a2030; border-radius:2px;"></div>
       </div>
     </div>
 
-    <div class="sim-body" id="simBody"></div>
-
-    <div class="sim-footer">
-      <div class="sim-input-fake">Pega el mensaje de tu ex...</div>
-      <div class="sim-send">➤</div>
+    <!-- SIDE PANEL (desktop only) -->
+    <div class="sim-side-panel">
+      <div class="sim-side-title">Elige un escenario</div>
+      <div class="sim-side-scenarios">
+        <button class="sim-scene-btn active" onclick="goScenario(0)">
+          <span class="scene-num">01</span>
+          <span class="scene-label">"Ok, no importa..."</span>
+        </button>
+        <button class="sim-scene-btn" onclick="goScenario(1)">
+          <span class="scene-num">02</span>
+          <span class="scene-label">"Qué tiempos..."</span>
+        </button>
+        <button class="sim-scene-btn" onclick="goScenario(2)">
+          <span class="scene-num">03</span>
+          <span class="scene-label">"Veremos cómo estoy..."</span>
+        </button>
+      </div>
+      <div class="sim-side-note">
+        La IA detecta emociones, señales ocultas y genera la respuesta exacta — en menos de 10 segundos.
+      </div>
     </div>
+
   </div>
 
   <button class="sim-next-btn" onclick="nextScenario()">
@@ -1354,6 +1630,7 @@ function clearSim() {
 function goScenario(idx) {
   currentScenario = idx;
   document.querySelectorAll('.sim-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  document.querySelectorAll('.sim-scene-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
   clearSim();
   runScenario(SCENARIOS[idx]);
 }
@@ -1451,8 +1728,21 @@ async function runScenario(s) {
   );
 }
 
+// Phone clock
+function updatePhoneClock() {
+  const now = new Date();
+  const h = now.getHours();
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const el = document.getElementById('phoneTime');
+  if (el) el.textContent = h + ':' + m;
+}
+
 // start on load
-document.addEventListener('DOMContentLoaded', () => goScenario(0));
+document.addEventListener('DOMContentLoaded', () => {
+  goScenario(0);
+  updatePhoneClock();
+  setInterval(updatePhoneClock, 30000);
+});
 // ─── END SIMULATION ─────────────────────────────────────────
 
 function toggleFaq(el) {
