@@ -289,117 +289,234 @@ h2 em { font-style: italic; color: var(--accent); }
   line-height: 1.6;
 }
 
-/* ===== CHAT DEMO ===== */
-.demo-section {
-  padding: 100px 24px;
-  max-width: 660px;
+/* ===== CHAT SIMULATION ===== */
+.sim-section {
+  padding: 80px 24px;
+  max-width: 680px;
   margin: 0 auto;
+  text-align: center;
 }
 
-.chat-window {
+.sim-phone {
+  margin-top: 48px;
   background: var(--surface);
   border: 1px solid var(--dim);
-  border-radius: 18px;
+  border-radius: 20px;
   overflow: hidden;
-  margin-top: 48px;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(155,63,212,0.15);
+  text-align: left;
+  position: relative;
 }
 
-.chat-header {
+.sim-header {
   background: var(--surface2);
   padding: 14px 20px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
   border-bottom: 1px solid var(--dim);
 }
 
-.avatar {
+.sim-header-left { display: flex; align-items: center; gap: 12px; }
+
+.sim-avatar {
   width: 38px; height: 38px;
   border-radius: 50%;
   background: var(--accent);
   display: flex; align-items: center; justify-content: center;
   font-size: 18px;
+  flex-shrink: 0;
 }
 
-.ch-name { font-size: 14px; font-weight: 500; }
-.ch-status { font-size: 12px; color: #5cb85c; }
+.sim-name { font-size: 14px; font-weight: 500; color: var(--white); }
+.sim-status { font-size: 12px; color: #5cb85c; }
 
-.chat-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 14px; }
+.sim-scenario-dots {
+  display: flex;
+  gap: 6px;
+}
 
-.msg {
-  max-width: 82%;
-  padding: 12px 16px;
+.sim-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--dim);
+  transition: background 0.3s;
+  cursor: pointer;
+}
+.sim-dot.active { background: var(--accent); }
+
+.sim-body {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 420px;
+}
+
+.sim-msg {
+  max-width: 85%;
+  padding: 11px 15px;
   font-size: 14px;
   line-height: 1.6;
   border-radius: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.msg-user {
-  align-self: flex-end;
+.sim-msg.visible { opacity: 1; transform: translateY(0); }
+
+.sim-msg-her {
+  align-self: flex-start;
   background: var(--surface2);
+  color: var(--cream);
+  border-bottom-left-radius: 4px;
+  border: 1px solid var(--dim);
+  font-style: italic;
+}
+
+.sim-msg-her::before {
+  content: 'Ella:';
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+  font-style: normal;
+}
+
+.sim-msg-user {
+  align-self: flex-end;
+  background: #1e1226;
+  border: 1px solid var(--dim);
   color: var(--cream);
   border-bottom-right-radius: 4px;
 }
 
-.msg-bot {
+.sim-msg-bot {
   align-self: flex-start;
-  background: #1e0f2e;
+  background: #150b22;
   border: 1px solid #3d1a5e;
   color: var(--cream);
   border-bottom-left-radius: 4px;
+  max-width: 92%;
 }
 
-.msg-bot-label {
+.sim-bot-label {
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 6px;
 }
 
-.emotion-bars { margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+.sim-bars { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
 
-.ebar {
+.sim-bar-row {
   display: flex;
   align-items: center;
   gap: 10px;
   font-size: 12px;
-  color: var(--muted);
 }
 
-.ebar-label { width: 90px; font-size: 12px; }
+.sim-bar-label { width: 100px; color: var(--muted); font-size: 12px; }
 
-.ebar-track {
+.sim-bar-track {
   flex: 1;
-  height: 3px;
+  height: 4px;
   background: var(--dim);
   border-radius: 2px;
   overflow: hidden;
 }
 
-.ebar-fill {
+.sim-bar-fill {
   height: 100%;
   border-radius: 2px;
-  animation: barGrow 1.2s ease forwards;
-  transform-origin: left;
+  width: 0%;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes barGrow {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
+.sim-bar-val { font-size: 12px; font-weight: 500; color: var(--cream); min-width: 32px; text-align: right; }
+
+.sim-typing {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 12px 15px;
+  background: #150b22;
+  border: 1px solid #3d1a5e;
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.sim-typing.visible { opacity: 1; }
+.sim-typing span {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: typingDot 1.2s infinite;
+}
+.sim-typing span:nth-child(2) { animation-delay: 0.2s; }
+.sim-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingDot {
+  0%, 60%, 100% { opacity: 0.2; transform: scale(0.8); }
+  30% { opacity: 1; transform: scale(1); }
 }
 
-.ebar-val { font-size: 12px; font-weight: 500; color: var(--cream); min-width: 32px; text-align: right; }
-
-.divider-msg {
-  align-self: center;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-  padding: 4px 0;
+.sim-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface2);
 }
+
+.sim-input-fake {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--dim);
+  border-radius: 20px;
+  padding: 9px 16px;
+  font-size: 13px;
+  color: var(--muted);
+  font-family: 'Outfit', sans-serif;
+}
+
+.sim-send {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sim-next-btn {
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--dim);
+  color: var(--muted);
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  padding: 10px 24px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.sim-next-btn:hover { border-color: var(--accent); color: var(--white); }
 
 /* ===== BENEFITS ===== */
 .benefits-section {
@@ -957,64 +1074,38 @@ footer {
   </div>
 </section>
 
-<!-- DEMO CHAT -->
-<section class="demo-section">
-  <span class="section-label" style="display:block; text-align:center;">Así funciona</span>
-  <h2 style="text-align:center;">Análisis real,<em>en segundos</em></h2>
+<!-- CHAT SIMULATION -->
+<section class="sim-section">
+  <span class="section-label" style="display:block; text-align:center;">Ve cómo funciona</span>
+  <h2 style="text-align:center;">Análisis real.<em>En segundos.</em></h2>
 
-  <div class="chat-window">
-    <div class="chat-header">
-      <div class="avatar">🔮</div>
-      <div>
-        <div class="ch-name">Decoder de tu Ex</div>
-        <div class="ch-status">● En línea</div>
-      </div>
-    </div>
-    <div class="chat-body">
-
-      <div class="msg msg-user">
-        Hola, me escribió esto: "Ok, supongo que estás muy ocupado... no importa."<br><br>
-        ¿Qué significa?
-      </div>
-
-      <div class="msg msg-bot">
-        <div class="msg-bot-label">🔍 Análisis emocional</div>
-        Este mensaje tiene múltiples capas. Superficialmente es indiferencia, pero la estructura revela algo diferente.
-
-        <div class="emotion-bars">
-          <div class="ebar">
-            <span class="ebar-label">Frustración</span>
-            <div class="ebar-track"><div class="ebar-fill" style="width:78%; background:#9b3fd4;"></div></div>
-            <span class="ebar-val">78%</span>
-          </div>
-          <div class="ebar">
-            <span class="ebar-label">Expectativa</span>
-            <div class="ebar-track"><div class="ebar-fill" style="width:85%; background:#c9a84c;"></div></div>
-            <span class="ebar-val">85%</span>
-          </div>
-          <div class="ebar">
-            <span class="ebar-label">Indiferencia real</span>
-            <div class="ebar-track"><div class="ebar-fill" style="width:12%; background:#3d3545;"></div></div>
-            <span class="ebar-val">12%</span>
-          </div>
+  <div class="sim-phone">
+    <div class="sim-header">
+      <div class="sim-header-left">
+        <div class="sim-avatar">🔮</div>
+        <div>
+          <div class="sim-name">Decoder de tu Ex</div>
+          <div class="sim-status">● Analizando...</div>
         </div>
       </div>
-
-      <div class="divider-msg">— Señal detectada —</div>
-
-      <div class="msg msg-bot">
-        <div class="msg-bot-label">💡 Lo que realmente dice</div>
-        <strong style="color:var(--cream);">Ella esperaba algo de ti y no lo recibió.</strong> El "no importa" no es resignación — es una invitación disfrazada. Está midiendo si reaccionas.
+      <div class="sim-scenario-dots">
+        <div class="sim-dot active" onclick="goScenario(0)"></div>
+        <div class="sim-dot" onclick="goScenario(1)"></div>
+        <div class="sim-dot" onclick="goScenario(2)"></div>
       </div>
+    </div>
 
-      <div class="msg msg-bot">
-        <div class="msg-bot-label">✉️ Respuesta recomendada</div>
-        <em style="color:var(--cream);">"Tienes razón, no debí dejarte esperando. ¿Hablamos esta noche?"</em><br><br>
-        <span style="font-size:13px; color:var(--muted);">Reconoces sin excusarte en exceso. Propones acción concreta. Corto y directo al punto.</span>
-      </div>
+    <div class="sim-body" id="simBody"></div>
 
+    <div class="sim-footer">
+      <div class="sim-input-fake">Pega el mensaje de tu ex...</div>
+      <div class="sim-send">➤</div>
     </div>
   </div>
+
+  <button class="sim-next-btn" onclick="nextScenario()">
+    ↻ &nbsp;Ver otro mensaje
+  </button>
 </section>
 
 <!-- BENEFITS -->
@@ -1056,35 +1147,6 @@ footer {
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how-section">
-  <span class="section-label">El proceso</span>
-  <h2>Tres pasos.<em>Un resultado.</em></h2>
-
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div>
-        <div class="step-title">Pega el mensaje de tu ex</div>
-        <p class="step-desc">Abre el bot en Telegram y copia exactamente lo que ella te escribió. Puede ser un mensaje corto o toda una conversación.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div>
-        <div class="step-title">La IA analiza en segundos</div>
-        <p class="step-desc">El sistema detecta el tono emocional, las señales ocultas, el nivel de interés real y el estado emocional detrás de las palabras.</p>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div>
-        <div class="step-title">Recibe tu respuesta lista</div>
-        <p class="step-desc">Obtén el análisis completo más una respuesta estratégica, lista para enviar. Sin dudas, sin errores, sin perder el momento.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- TESTIMONIALS -->
 <section class="testi-section">
@@ -1238,6 +1300,161 @@ footer {
 </footer>
 
 <script>
+// ─── CHAT SIMULATION ───────────────────────────────────────
+const SCENARIOS = [
+  {
+    her: '"Ok, supongo que estás muy ocupado... no importa."',
+    user: 'Me escribió esto hace 10 min, ¿qué significa?',
+    analysis: 'Este mensaje tiene múltiples capas. Superficialmente parece indiferencia, pero la estructura revela algo completamente diferente.',
+    bars: [
+      { label: 'Frustración',     pct: 78, color: '#9b3fd4' },
+      { label: 'Expectativa',     pct: 85, color: '#c9a84c' },
+      { label: 'Indiferencia real', pct: 12, color: '#3d3545' }
+    ],
+    meaning: 'Ella esperaba algo de ti y no llegó. El "no importa" no es resignación — es una prueba. Está midiendo si reaccionas.',
+    response: '"Tienes razón, no debí dejarte esperando. ¿Hablamos esta noche?"',
+    why: 'Reconoces sin excusarte de más. Propones acción concreta. Corto y directo.'
+  },
+  {
+    her: '"Jaja sí, lo recuerdo bien. Qué tiempos..."',
+    user: 'Me respondió esto cuando le pregunté por ese viaje.',
+    analysis: 'La nostalgia está activa. Evocó un recuerdo compartido sin que tú lo mencionaras primero — eso es una señal fuerte.',
+    bars: [
+      { label: 'Nostalgia',    pct: 82, color: '#9b3fd4' },
+      { label: 'Interés real', pct: 71, color: '#c9a84c' },
+      { label: 'Distancia',    pct: 14, color: '#3d3545' }
+    ],
+    meaning: 'Te abrió una puerta emocional. Si dejas pasar este momento sin actuar, la puerta se cierra.',
+    response: '"Sí, ese día fue diferente. ¿Qué estás haciendo el jueves?"',
+    why: 'Validas el recuerdo sin exagerar. Propones sin presionar. La pregunta es natural.'
+  },
+  {
+    her: '"No sé... veremos cómo estoy ese día."',
+    user: 'Le pregunté si quería vernos y me mandó esto.',
+    analysis: 'No es un rechazo. Es una señal de interés mezclada con miedo a parecer disponible. Está protegiéndose.',
+    bars: [
+      { label: 'Interés oculto', pct: 68, color: '#9b3fd4' },
+      { label: 'Miedo',          pct: 55, color: '#c9a84c' },
+      { label: 'Rechazo real',   pct:  9, color: '#3d3545' }
+    ],
+    meaning: 'Quiere ir pero no quiere parecer disponible. Dale una salida fácil y el interés subirá.',
+    response: '"Sin presión. Si puedes, genial — si no, otro día. Solo avísame."',
+    why: 'Eliminas su miedo al compromiso. Quedas en posición de poder. Ella tiene que decidir.'
+  }
+];
+
+let currentScenario = 0;
+let animTimeout = null;
+
+function clearSim() {
+  if (animTimeout) clearTimeout(animTimeout);
+  document.getElementById('simBody').innerHTML = '';
+}
+
+function goScenario(idx) {
+  currentScenario = idx;
+  document.querySelectorAll('.sim-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  clearSim();
+  runScenario(SCENARIOS[idx]);
+}
+
+function nextScenario() {
+  currentScenario = (currentScenario + 1) % SCENARIOS.length;
+  goScenario(currentScenario);
+}
+
+function addMsg(html, cls, delay) {
+  return new Promise(resolve => {
+    animTimeout = setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'sim-msg ' + cls;
+      el.innerHTML = html;
+      const body = document.getElementById('simBody');
+      body.appendChild(el);
+      body.scrollTop = body.scrollHeight;
+      requestAnimationFrame(() => requestAnimationFrame(() => el.classList.add('visible')));
+      resolve();
+    }, delay);
+  });
+}
+
+function showTyping(delay) {
+  return new Promise(resolve => {
+    animTimeout = setTimeout(() => {
+      const t = document.createElement('div');
+      t.className = 'sim-typing';
+      t.id = 'simTyping';
+      t.innerHTML = '<span></span><span></span><span></span>';
+      const body = document.getElementById('simBody');
+      body.appendChild(t);
+      body.scrollTop = body.scrollHeight;
+      requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('visible')));
+      resolve();
+    }, delay);
+  });
+}
+
+function removeTyping() {
+  const t = document.getElementById('simTyping');
+  if (t) t.remove();
+}
+
+function barsHTML(bars) {
+  return '<div class="sim-bars">' + bars.map(b =>
+    `<div class="sim-bar-row">
+      <span class="sim-bar-label">${b.label}</span>
+      <div class="sim-bar-track"><div class="sim-bar-fill" style="background:${b.color}" data-pct="${b.pct}"></div></div>
+      <span class="sim-bar-val">${b.pct}%</span>
+    </div>`
+  ).join('') + '</div>';
+}
+
+function animateBars() {
+  document.querySelectorAll('.sim-bar-fill').forEach(el => {
+    const pct = el.dataset.pct;
+    requestAnimationFrame(() => setTimeout(() => { el.style.width = pct + '%'; }, 80));
+  });
+}
+
+async function runScenario(s) {
+  clearSim();
+
+  await addMsg(s.her, 'sim-msg-her', 400);
+  await addMsg(s.user, 'sim-msg-user', 1100);
+  await showTyping(1800);
+
+  await new Promise(r => animTimeout = setTimeout(r, 1600));
+  removeTyping();
+
+  await addMsg(
+    `<div class="sim-bot-label">🔍 Análisis emocional</div>${s.analysis}${barsHTML(s.bars)}`,
+    'sim-msg-bot', 100
+  );
+  animateBars();
+
+  await showTyping(2200);
+  await new Promise(r => animTimeout = setTimeout(r, 1400));
+  removeTyping();
+
+  await addMsg(
+    `<div class="sim-bot-label">💡 Lo que realmente dice</div>${s.meaning}`,
+    'sim-msg-bot', 100
+  );
+
+  await showTyping(3000);
+  await new Promise(r => animTimeout = setTimeout(r, 1200));
+  removeTyping();
+
+  await addMsg(
+    `<div class="sim-bot-label">✉️ Respuesta recomendada</div><em style="color:var(--cream);font-style:italic;">${s.response}</em><br><span style="font-size:12px;color:var(--muted);margin-top:8px;display:block;">${s.why}</span>`,
+    'sim-msg-bot', 100
+  );
+}
+
+// start on load
+document.addEventListener('DOMContentLoaded', () => goScenario(0));
+// ─── END SIMULATION ─────────────────────────────────────────
+
 function toggleFaq(el) {
   const item = el.parentElement;
   const isOpen = item.classList.contains('open');
