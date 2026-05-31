@@ -1386,6 +1386,301 @@ footer {
 </section>
 
 
+<!-- RADAR SOCIAL -->
+<section class="radar-section">
+  <div class="radar-inner">
+    <div class="radar-badge">
+      <span class="radar-badge-dot"></span>
+      Nueva función · Radar Social
+    </div>
+
+    <h2 class="radar-title">Ella te bloqueó.<em>El Decoder igual lo lee.</em></h2>
+    <p class="radar-sub">Los mensajes no son el único idioma que habla tu ex. Sus movimientos en redes — lo que publica, lo que borra, a quién sigue, cuándo te bloqueó — dicen más que cualquier texto. El Decoder ahora descifra eso también.</p>
+
+    <div class="radar-signals">
+
+      <div class="radar-signal-card">
+        <div class="radar-signal-header">
+          <span class="radar-signal-icon">🚫</span>
+          <span class="radar-signal-tag tag-alert">Señal de alerta</span>
+        </div>
+        <p class="radar-signal-situation">"Me bloqueó en Instagram pero no en WhatsApp"</p>
+        <div class="radar-signal-decode">
+          <span class="radar-decode-label">🔍 Decoder</span>
+          <p class="radar-decode-text">Bloqueo selectivo = control emocional activo. No quiere que veas su vida, pero mantiene el canal abierto. Está procesando, no cerrando. <strong>Probabilidad de reapertura: alta.</strong></p>
+        </div>
+      </div>
+
+      <div class="radar-signal-card">
+        <div class="radar-signal-header">
+          <span class="radar-signal-icon">👀</span>
+          <span class="radar-signal-tag tag-interest">Señal de interés</span>
+        </div>
+        <p class="radar-signal-situation">"Vio mi historia a los 3 minutos de publicarla"</p>
+        <div class="radar-signal-decode">
+          <span class="radar-decode-label">🔍 Decoder</span>
+          <p class="radar-decode-text">Te está monitoreando. Ver historias en los primeros minutos no es casualidad — tiene tus notificaciones activas o revisa tu perfil con frecuencia. <strong>Está más pendiente de ti de lo que aparenta.</strong></p>
+        </div>
+      </div>
+
+      <div class="radar-signal-card">
+        <div class="radar-signal-header">
+          <span class="radar-signal-icon">💔</span>
+          <span class="radar-signal-tag tag-neutral">Señal ambigua</span>
+        </div>
+        <p class="radar-signal-situation">"Empezó a subir fotos saliendo todos los fines de semana"</p>
+        <div class="radar-signal-decode">
+          <span class="radar-decode-label">🔍 Decoder</span>
+          <p class="radar-decode-text">Publicidad emocional. Cuando alguien muestra que "está bien" con demasiada frecuencia, generalmente no está bien. Es un mensaje dirigido. <strong>El Decoder te dice exactamente cómo reaccionar — o no reaccionar.</strong></p>
+        </div>
+      </div>
+
+      <div class="radar-signal-card">
+        <div class="radar-signal-header">
+          <span class="radar-signal-icon">🔄</span>
+          <span class="radar-signal-tag tag-interest">Señal fuerte</span>
+        </div>
+        <p class="radar-signal-situation">"Me desbloqueó después de 3 semanas sin contacto"</p>
+        <div class="radar-signal-decode">
+          <span class="radar-decode-label">🔍 Decoder</span>
+          <p class="radar-decode-text">Movimiento calculado. El desbloqueo rara vez es accidental. Te está dando acceso — y esperando ver si lo notas. <strong>Este es el momento exacto para actuar. El Decoder te dice cómo.</strong></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="radar-how">
+      <div class="radar-how-step">
+        <span class="radar-how-num">01</span>
+        <p>Describes lo que observas: <em>"me bloqueó en Instagram", "vio mi historia", "tiene fotos con alguien"</em></p>
+      </div>
+      <div class="radar-how-divider"></div>
+      <div class="radar-how-step">
+        <span class="radar-how-num">02</span>
+        <p>El Decoder analiza el patrón de comportamiento usando psicología del apego y señales de reconquista</p>
+      </div>
+      <div class="radar-how-divider"></div>
+      <div class="radar-how-step">
+        <span class="radar-how-num">03</span>
+        <p>Recibes el significado real de cada movimiento — y exactamente qué hacer a continuación</p>
+      </div>
+    </div>
+
+    <p class="radar-note">No necesita acceso a sus redes. No necesita nada de ella. Solo describes lo que ves — y la IA hace el resto.</p>
+  </div>
+</section>
+
+<style>
+.radar-section {
+  padding: 100px 24px;
+  background: linear-gradient(180deg, var(--bg) 0%, #0d0814 50%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.radar-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.4;
+}
+
+.radar-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.radar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(155, 63, 212, 0.12);
+  border: 1px solid rgba(155, 63, 212, 0.3);
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+}
+
+.radar-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #5cb85c;
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+.radar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 6vw, 68px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--white);
+}
+
+.radar-title em { font-style: italic; color: var(--accent); display: block; }
+
+.radar-sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 60px;
+  line-height: 1.7;
+}
+
+.radar-signals {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 16px;
+  margin-bottom: 64px;
+  text-align: left;
+}
+
+.radar-signal-card {
+  background: var(--surface);
+  border: 1px solid var(--dim);
+  border-radius: 12px;
+  padding: 24px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.radar-signal-card:hover {
+  border-color: rgba(155, 63, 212, 0.4);
+  transform: translateY(-2px);
+}
+
+.radar-signal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.radar-signal-icon { font-size: 22px; }
+
+.radar-signal-tag {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.tag-alert   { background: rgba(220, 60, 60, 0.15);  color: #e06060; border: 1px solid rgba(220,60,60,0.25); }
+.tag-interest { background: rgba(92, 184, 92, 0.12); color: #6abf6a; border: 1px solid rgba(92,184,92,0.25); }
+.tag-neutral  { background: rgba(201, 168, 76, 0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+
+.radar-signal-situation {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 16px;
+  line-height: 1.4;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--dim);
+}
+
+.radar-signal-decode {
+  padding-top: 4px;
+}
+
+.radar-decode-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.radar-decode-text {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.radar-decode-text strong { color: var(--cream); }
+
+.radar-how {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 40px;
+  background: var(--surface);
+  border: 1px solid var(--dim);
+  border-radius: 12px;
+  padding: 32px 24px;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.radar-how-step {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.radar-how-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.5;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.radar-how-step p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.radar-how-step p em { color: var(--cream); font-style: italic; }
+
+.radar-how-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--dim);
+  flex-shrink: 0;
+}
+
+.radar-note {
+  font-size: 13px;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+  border: 1px solid var(--dim);
+  border-radius: 8px;
+  padding: 14px 24px;
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .radar-signals { grid-template-columns: 1fr; }
+  .radar-how-divider { width: 60px; height: 1px; }
+  .radar-how { flex-direction: column; gap: 24px; }
+}
+</style>
+
 <!-- TESTIMONIALS -->
 <section class="testi-section">
   <span class="section-label">Resultados reales</span>
