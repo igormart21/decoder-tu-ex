@@ -1710,6 +1710,515 @@ footer {
   </div>
 </section>
 
+<!-- ===== MODO RECONQUISTA ACTIVA (DEMO INTERACTIVA) ===== -->
+<section id="modo-reconquista">
+  <span class="mra-eyebrow">Nuevo · Demo en vivo</span>
+  <h2 class="mra-title">Modo Reconquista <em>Activa</em></h2>
+  <p class="mra-sub">Responde 5 preguntas y el Decoder genera tu <strong>plan de reconquista personalizado en 3 etapas</strong> — con las mensajes exactas para enviar. Gratis, aquí mismo.</p>
+
+  <div class="mra-card">
+
+    <!-- PROGRESO -->
+    <div class="mra-progress" id="mraProgress">
+      <div class="mra-progress-head">
+        <span id="mraStepLabel">Paso 1 de 5</span>
+        <span id="mraStepName">Tiempo sin contacto</span>
+      </div>
+      <div class="mra-progress-track"><div class="mra-progress-fill" id="mraProgressFill"></div></div>
+    </div>
+
+    <!-- WIZARD -->
+    <div class="mra-stage" id="mraStage">
+
+      <!-- P1 -->
+      <div class="mra-step mra-step--active" data-step="1">
+        <h3 class="mra-q">¿Cuánto tiempo hace que no hablan?</h3>
+        <div class="mra-options" data-key="tiempo">
+          <button type="button" class="mra-opt" data-val="menos1sem">Menos de 1 semana</button>
+          <button type="button" class="mra-opt" data-val="1a3sem">1 – 3 semanas</button>
+          <button type="button" class="mra-opt" data-val="1a2mes">1 – 2 meses</button>
+          <button type="button" class="mra-opt" data-val="mas2mes">Más de 2 meses</button>
+        </div>
+      </div>
+
+      <!-- P2 -->
+      <div class="mra-step" data-step="2">
+        <h3 class="mra-q">¿Quién terminó y cuál fue el motivo principal?</h3>
+        <textarea class="mra-input" data-key="ruptura" rows="3" placeholder="Ej: ella terminó por distancia emocional, decía que ya no sentía lo mismo..."></textarea>
+      </div>
+
+      <!-- P3 -->
+      <div class="mra-step" data-step="3">
+        <h3 class="mra-q">¿Cuál fue el último contacto entre ustedes?</h3>
+        <p class="mra-hint">Pega aquí el último mensaje que se cruzaron (o descríbelo).</p>
+        <textarea class="mra-input" data-key="ultimo" rows="3" placeholder="Ej: le escribí 'te extraño' y respondió 'creo que es mejor así' hace 8 días..."></textarea>
+      </div>
+
+      <!-- P4 -->
+      <div class="mra-step" data-step="4">
+        <h3 class="mra-q">¿Qué está haciendo ella en las redes ahora?</h3>
+        <textarea class="mra-input" data-key="redes" rows="3" placeholder="Ej: subiendo fotos saliendo con amigas, me bloqueó en Instagram, dejó de ver mis estados..."></textarea>
+      </div>
+
+      <!-- P5 -->
+      <div class="mra-step" data-step="5">
+        <h3 class="mra-q">¿Cuál es tu objetivo principal ahora?</h3>
+        <div class="mra-options" data-key="objetivo">
+          <button type="button" class="mra-opt" data-val="volver">Quiero que vuelva</button>
+          <button type="button" class="mra-opt" data-val="reabrir">Quiero reabrir el contacto</button>
+          <button type="button" class="mra-opt" data-val="entender">Quiero entender qué siente</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NAV -->
+    <div class="mra-nav" id="mraNav">
+      <button type="button" class="mra-back" id="mraBack">← Atrás</button>
+      <button type="button" class="mra-next" id="mraNext" disabled>Continuar →</button>
+    </div>
+
+    <!-- LOADING -->
+    <div class="mra-loading" id="mraLoading">
+      <div class="mra-spinner"></div>
+      <p class="mra-loading-text" id="mraLoadingText">Analizando el patrón emocional de la ruptura...</p>
+      <div class="mra-loading-bar"><div class="mra-loading-bar-fill"></div></div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="mra-result" id="mraResult">
+
+      <div class="mra-report-head">
+        <span class="mra-report-tag">Informe generado · Decoder IA</span>
+        <h3 class="mra-plan-name" id="mraPlanName"></h3>
+      </div>
+
+      <div class="mra-risk" id="mraRisk">
+        <div class="mra-risk-left">
+          <span class="mra-risk-label">Nivel de riesgo</span>
+          <span class="mra-risk-value" id="mraRiskValue"></span>
+        </div>
+        <p class="mra-risk-just" id="mraRiskJust"></p>
+      </div>
+
+      <div class="mra-diag">
+        <span class="mra-block-label">Diagnóstico</span>
+        <p id="mraDiag"></p>
+      </div>
+
+      <!-- ETAPA 1 (visible) -->
+      <div class="mra-stage1">
+        <div class="mra-stage-head">
+          <span class="mra-stage-num">01</span>
+          <span class="mra-stage-title" id="mraE1Title"></span>
+          <span class="mra-stage-free">Gratis</span>
+        </div>
+        <div class="mra-msgbox">
+          <span class="mra-msgbox-label">Mensaje exacto para enviar hoy</span>
+          <p class="mra-msg" id="mraE1Msg"></p>
+        </div>
+        <div class="mra-why">
+          <span class="mra-why-label">Por qué funciona</span>
+          <p id="mraE1Why"></p>
+        </div>
+      </div>
+
+      <!-- ETAPAS 2 y 3 (bloqueadas) -->
+      <div class="mra-locked" id="mraLocked">
+        <div class="mra-locked-content" aria-hidden="true">
+          <div class="mra-stage-head">
+            <span class="mra-stage-num">02</span>
+            <span class="mra-stage-title">En 48h — Calentamiento</span>
+          </div>
+          <div class="mra-msgbox"><p class="mra-msg">Si responde frío: «Jaja tranquila, no esperaba que…» · Si muestra interés: «Sabía que ibas a…» · Si no responde: «…»</p></div>
+          <div class="mra-stage-head" style="margin-top:22px">
+            <span class="mra-stage-num">03</span>
+            <span class="mra-stage-title">En 5-7 días — El Giro</span>
+          </div>
+          <div class="mra-msgbox"><p class="mra-msg">Mensaje exacto para proponer el encuentro, el horario ideal para enviarlo y el error que arruina este momento…</p></div>
+        </div>
+        <div class="mra-lock-overlay">
+          <div class="mra-lock-icon">🔒</div>
+          <p class="mra-lock-text">Etapas 2 y 3 bloqueadas</p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mra-cta">
+        <h3 class="mra-cta-title">Tu plan completo está listo</h3>
+        <p class="mra-cta-sub">Desbloquea la <strong>Etapa 2 y 3</strong> — y nunca más te quedes sin saber qué responder.</p>
+        <a href="#precio" class="mra-cta-btn" id="mraCtaBtn">QUIERO MI PLAN COMPLETO</a>
+        <p class="mra-cta-guarantee">✓ 7 días de garantía · ✓ Acceso inmediato · ✓ Cancela cuando quieras</p>
+        <button type="button" class="mra-restart" id="mraRestart">↻ Analizar otra situación</button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ===== MODO RECONQUISTA ACTIVA — estilos aislados (prefijo .mra / #modo-reconquista) ===== */
+#modo-reconquista{
+  --mra-bg:#0a0a0a; --mra-card:#111111; --mra-border:#222222;
+  --mra-grad:linear-gradient(135deg,#7c3aed,#4f46e5);
+  --mra-text:#f0eaf5; --mra-muted:#8a8190;
+  --r-bajo:#22c55e; --r-medio:#eab308; --r-alto:#f97316; --r-critico:#ef4444;
+  padding:90px 20px; max-width:760px; margin:0 auto; text-align:center;
+}
+#modo-reconquista .mra-eyebrow{
+  display:inline-block; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:#a78bfa; border:1px solid rgba(124,58,237,.4); border-radius:99px; padding:6px 16px; margin-bottom:22px;
+}
+#modo-reconquista .mra-title{
+  font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(34px,6vw,52px);
+  line-height:1.05; margin-bottom:16px; color:var(--mra-text);
+}
+#modo-reconquista .mra-title em{ font-style:italic; background:var(--mra-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+#modo-reconquista .mra-sub{ color:var(--mra-muted); max-width:540px; margin:0 auto 40px; font-size:16px; line-height:1.65; }
+#modo-reconquista .mra-sub strong{ color:var(--mra-text); font-weight:500; }
+
+#modo-reconquista .mra-card{
+  background:var(--mra-card); border:1px solid var(--mra-border); border-radius:18px;
+  padding:34px 28px; text-align:left; position:relative; overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+
+/* progreso */
+#modo-reconquista .mra-progress-head{ display:flex; justify-content:space-between; font-size:12px; color:var(--mra-muted); margin-bottom:10px; letter-spacing:.04em; }
+#modo-reconquista .mra-progress-head span:first-child{ color:#a78bfa; font-weight:500; }
+#modo-reconquista .mra-progress-track{ height:5px; background:#1c1c1c; border-radius:99px; overflow:hidden; }
+#modo-reconquista .mra-progress-fill{ height:100%; width:20%; background:var(--mra-grad); border-radius:99px; transition:width .45s cubic-bezier(.4,0,.2,1); }
+
+/* wizard */
+#modo-reconquista .mra-stage{ position:relative; margin-top:30px; min-height:190px; }
+#modo-reconquista .mra-step{
+  position:absolute; inset:0; opacity:0; transform:translateX(28px);
+  pointer-events:none; transition:opacity .35s ease, transform .35s ease;
+}
+#modo-reconquista .mra-step--active{ opacity:1; transform:translateX(0); pointer-events:auto; position:relative; }
+#modo-reconquista .mra-q{ font-size:21px; font-weight:500; color:var(--mra-text); margin-bottom:18px; line-height:1.35; }
+#modo-reconquista .mra-hint{ font-size:13px; color:var(--mra-muted); margin:-10px 0 14px; }
+
+#modo-reconquista .mra-options{ display:flex; flex-direction:column; gap:11px; }
+#modo-reconquista .mra-opt{
+  width:100%; text-align:left; padding:16px 18px; border-radius:12px; cursor:pointer;
+  background:#161616; border:1px solid var(--mra-border); color:var(--mra-text);
+  font-family:inherit; font-size:15px; transition:all .2s ease;
+}
+#modo-reconquista .mra-opt:hover{ border-color:#7c3aed; background:#191322; }
+#modo-reconquista .mra-opt.selected{ border-color:#7c3aed; background:rgba(124,58,237,.16); box-shadow:0 0 0 1px #7c3aed inset; }
+
+#modo-reconquista .mra-input{
+  width:100%; padding:15px 16px; border-radius:12px; resize:vertical; min-height:96px;
+  background:#161616; border:1px solid var(--mra-border); color:var(--mra-text);
+  font-family:inherit; font-size:15px; line-height:1.5;
+}
+#modo-reconquista .mra-input:focus{ outline:none; border-color:#7c3aed; box-shadow:0 0 0 1px #7c3aed inset; }
+#modo-reconquista .mra-input::placeholder{ color:#5a5560; }
+
+/* nav */
+#modo-reconquista .mra-nav{ display:flex; justify-content:space-between; align-items:center; gap:14px; margin-top:28px; }
+#modo-reconquista .mra-back{ background:none; border:none; color:var(--mra-muted); font-family:inherit; font-size:14px; cursor:pointer; padding:10px; opacity:0; pointer-events:none; transition:opacity .2s; }
+#modo-reconquista .mra-back.show{ opacity:1; pointer-events:auto; }
+#modo-reconquista .mra-back:hover{ color:var(--mra-text); }
+#modo-reconquista .mra-next{
+  margin-left:auto; background:var(--mra-grad); border:none; color:#fff; font-family:inherit;
+  font-size:14px; font-weight:600; letter-spacing:.04em; padding:14px 30px; border-radius:10px; cursor:pointer;
+  transition:transform .15s ease, opacity .2s ease;
+}
+#modo-reconquista .mra-next:hover{ transform:translateY(-2px); }
+#modo-reconquista .mra-next:disabled{ opacity:.35; cursor:not-allowed; transform:none; }
+
+/* loading */
+#modo-reconquista .mra-loading{ display:none; flex-direction:column; align-items:center; text-align:center; padding:40px 10px; }
+#modo-reconquista .mra-loading.show{ display:flex; }
+#modo-reconquista .mra-spinner{ width:46px; height:46px; border:3px solid #222; border-top-color:#7c3aed; border-radius:50%; animation:mra-spin .8s linear infinite; margin-bottom:24px; }
+@keyframes mra-spin{ to{ transform:rotate(360deg); } }
+#modo-reconquista .mra-loading-text{ font-size:16px; color:var(--mra-text); min-height:24px; margin-bottom:22px; transition:opacity .3s; }
+#modo-reconquista .mra-loading-bar{ width:100%; max-width:280px; height:4px; background:#1c1c1c; border-radius:99px; overflow:hidden; }
+#modo-reconquista .mra-loading-bar-fill{ height:100%; width:0; background:var(--mra-grad); animation:mra-fill 4.2s linear forwards; }
+@keyframes mra-fill{ to{ width:100%; } }
+
+/* resultado */
+#modo-reconquista .mra-result{ display:none; animation:mra-up .5s ease; }
+#modo-reconquista .mra-result.show{ display:block; }
+@keyframes mra-up{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:translateY(0); } }
+
+#modo-reconquista .mra-report-head{ border-bottom:1px solid var(--mra-border); padding-bottom:18px; margin-bottom:20px; }
+#modo-reconquista .mra-report-tag{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#a78bfa; }
+#modo-reconquista .mra-plan-name{ font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:700; color:var(--mra-text); margin-top:6px; line-height:1.15; }
+
+#modo-reconquista .mra-risk{ display:flex; align-items:center; gap:18px; background:#0d0d0d; border:1px solid var(--mra-border); border-radius:12px; padding:16px 18px; margin-bottom:22px; flex-wrap:wrap; }
+#modo-reconquista .mra-risk-left{ display:flex; flex-direction:column; gap:3px; }
+#modo-reconquista .mra-risk-label{ font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--mra-muted); }
+#modo-reconquista .mra-risk-value{ font-size:22px; font-weight:700; letter-spacing:.03em; }
+#modo-reconquista .mra-risk-just{ flex:1; min-width:180px; font-size:13.5px; color:var(--mra-muted); line-height:1.5; }
+
+#modo-reconquista .mra-block-label,#modo-reconquista .mra-why-label,#modo-reconquista .mra-msgbox-label{
+  display:block; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#a78bfa; margin-bottom:8px;
+}
+#modo-reconquista .mra-diag{ margin-bottom:26px; }
+#modo-reconquista .mra-diag p{ color:var(--mra-text); font-size:15.5px; line-height:1.6; opacity:.92; }
+
+#modo-reconquista .mra-stage-head{ display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+#modo-reconquista .mra-stage-num{ font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:700; background:var(--mra-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+#modo-reconquista .mra-stage-title{ font-size:16px; font-weight:600; color:var(--mra-text); }
+#modo-reconquista .mra-stage-free{ margin-left:auto; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--r-bajo); border:1px solid rgba(34,197,94,.4); border-radius:99px; padding:3px 10px; }
+
+#modo-reconquista .mra-msgbox{ background:#0d0d0d; border:1px solid var(--mra-border); border-left:3px solid #7c3aed; border-radius:10px; padding:16px 18px; margin-bottom:16px; }
+#modo-reconquista .mra-msg{ color:var(--mra-text); font-size:15.5px; line-height:1.6; font-style:italic; }
+#modo-reconquista .mra-why{ margin-bottom:8px; }
+#modo-reconquista .mra-why p{ color:var(--mra-muted); font-size:14px; line-height:1.55; }
+
+/* bloqueo */
+#modo-reconquista .mra-locked{ position:relative; margin-top:26px; border-radius:12px; overflow:hidden; }
+#modo-reconquista .mra-locked-content{ filter:blur(7px); opacity:.5; pointer-events:none; user-select:none; padding:4px; }
+#modo-reconquista .mra-lock-overlay{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; background:linear-gradient(180deg,rgba(10,10,10,.35),rgba(10,10,10,.75)); }
+#modo-reconquista .mra-lock-icon{ font-size:30px; }
+#modo-reconquista .mra-lock-text{ font-size:14px; letter-spacing:.06em; color:var(--mra-text); font-weight:500; }
+
+/* cta */
+#modo-reconquista .mra-cta{ text-align:center; margin-top:34px; padding-top:30px; border-top:1px solid var(--mra-border); }
+#modo-reconquista .mra-cta-title{ font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:700; color:var(--mra-text); margin-bottom:8px; }
+#modo-reconquista .mra-cta-sub{ color:var(--mra-muted); font-size:15px; line-height:1.55; max-width:420px; margin:0 auto 24px; }
+#modo-reconquista .mra-cta-sub strong{ color:var(--mra-text); }
+#modo-reconquista .mra-cta-btn{
+  display:inline-block; background:var(--mra-grad); color:#fff; text-decoration:none; font-weight:700;
+  letter-spacing:.05em; font-size:15px; padding:18px 40px; border-radius:12px;
+  box-shadow:0 14px 40px rgba(124,58,237,.4); transition:transform .15s ease; animation:mra-pulse 2.4s ease-in-out infinite;
+}
+#modo-reconquista .mra-cta-btn:hover{ transform:translateY(-3px); }
+@keyframes mra-pulse{ 0%,100%{ box-shadow:0 14px 40px rgba(124,58,237,.35); } 50%{ box-shadow:0 14px 50px rgba(124,58,237,.6); } }
+#modo-reconquista .mra-cta-guarantee{ color:var(--mra-muted); font-size:13px; margin-top:16px; }
+#modo-reconquista .mra-restart{ display:block; margin:20px auto 0; background:none; border:none; color:var(--mra-muted); font-family:inherit; font-size:13px; cursor:pointer; text-decoration:underline; opacity:.7; }
+#modo-reconquista .mra-restart:hover{ opacity:1; }
+
+@media (max-width:600px){
+  #modo-reconquista{ padding:64px 16px; }
+  #modo-reconquista .mra-card{ padding:26px 18px; }
+  #modo-reconquista .mra-q{ font-size:19px; }
+  #modo-reconquista .mra-next{ padding:13px 22px; }
+}
+</style>
+
+<script>
+(function(){
+  /* =========================================================================
+   *  MODO RECONQUISTA ACTIVA — lógica del demo (vanilla JS, autocontenido)
+   *
+   *  ⚠️ INTEGRACIÓN CON LA API DE ANTHROPIC (hacer en el BACKEND, no aquí):
+   *  La clave NUNCA debe ir en el front — sería visible para cualquier
+   *  visitante. Cuando exista el backend, reemplaza generarPlan() por:
+   *
+   *    async function generarPlan(r){
+   *      const res = await fetch('/api/reconquista', {           // tu endpoint
+   *        method:'POST', headers:{'Content-Type':'application/json'},
+   *        body: JSON.stringify(r)
+   *      });
+   *      return await res.json();   // el backend llama a claude-sonnet-4-6
+   *    }
+   *
+   *  Por ahora (validar la oferta) usamos un generador local que personaliza
+   *  el resultado con las respuestas reales del usuario. Costo cero, sin clave.
+   * ========================================================================= */
+
+  var root = document.getElementById('modo-reconquista');
+  if(!root) return;
+
+  var STEP_NAMES = ['Tiempo sin contacto','La ruptura','Último contacto','Señales en redes','Tu objetivo'];
+  var answers = { tiempo:'', ruptura:'', ultimo:'', redes:'', objetivo:'' };
+  var step = 1, TOTAL = 5;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var steps     = root.querySelectorAll('.mra-step');
+  var fill      = $('mraProgressFill');
+  var stepLabel = $('mraStepLabel');
+  var stepName  = $('mraStepName');
+  var btnNext   = $('mraNext');
+  var btnBack   = $('mraBack');
+
+  function currentStepEl(){ return root.querySelector('.mra-step[data-step="'+step+'"]'); }
+
+  function stepHasAnswer(){
+    var el = currentStepEl();
+    var opts = el.querySelector('.mra-options');
+    if(opts){ return !!answers[opts.dataset.key]; }
+    var inp = el.querySelector('.mra-input');
+    return inp && inp.value.trim().length > 1;
+  }
+
+  function refreshUI(){
+    steps.forEach(function(s){ s.classList.toggle('mra-step--active', +s.dataset.step === step); });
+    fill.style.width = (step/TOTAL*100) + '%';
+    stepLabel.textContent = 'Paso ' + step + ' de ' + TOTAL;
+    stepName.textContent  = STEP_NAMES[step-1];
+    btnBack.classList.toggle('show', step > 1);
+    btnNext.textContent = (step === TOTAL) ? 'Generar mi plan ✦' : 'Continuar →';
+    btnNext.disabled = !stepHasAnswer();
+  }
+
+  /* opciones (botones) */
+  root.querySelectorAll('.mra-options').forEach(function(group){
+    group.querySelectorAll('.mra-opt').forEach(function(opt){
+      opt.addEventListener('click', function(){
+        group.querySelectorAll('.mra-opt').forEach(function(o){ o.classList.remove('selected'); });
+        opt.classList.add('selected');
+        answers[group.dataset.key] = opt.dataset.val;
+        btnNext.disabled = false;
+      });
+    });
+  });
+
+  /* inputs de texto */
+  root.querySelectorAll('.mra-input').forEach(function(inp){
+    inp.addEventListener('input', function(){
+      answers[inp.dataset.key] = inp.value.trim();
+      btnNext.disabled = !stepHasAnswer();
+    });
+  });
+
+  btnBack.addEventListener('click', function(){ if(step>1){ step--; refreshUI(); } });
+  btnNext.addEventListener('click', function(){
+    if(!stepHasAnswer()) return;
+    if(step < TOTAL){ step++; refreshUI(); }
+    else { runAnalysis(); }
+  });
+
+  /* ---------- LOADING + ANÁLISIS ---------- */
+  var FRASES = [
+    'Analizando el patrón emocional de la ruptura...',
+    'Calculando tu ventana de reconquista...',
+    'Construyendo tu estrategia personalizada...',
+    'Generando los mensajes para cada escenario...'
+  ];
+
+  function runAnalysis(){
+    $('mraProgress').style.display='none';
+    $('mraStage').style.display='none';
+    $('mraNav').style.display='none';
+    var loading = $('mraLoading'); loading.classList.add('show');
+
+    var i=0, txt=$('mraLoadingText');
+    txt.textContent = FRASES[0];
+    var rot = setInterval(function(){
+      i=(i+1)%FRASES.length;
+      txt.style.opacity=0;
+      setTimeout(function(){ txt.textContent=FRASES[i]; txt.style.opacity=1; },280);
+    }, 1050);
+
+    var data = generarPlan(answers);          // ← swap por fetch al backend
+    setTimeout(function(){                      // mínimo 4.2s de "análisis"
+      clearInterval(rot);
+      loading.classList.remove('show');
+      renderResult(data);
+    }, 4200);
+  }
+
+  /* ---------- RENDER ---------- */
+  var RISK_COLORS = { 'BAJO':'var(--r-bajo)','MEDIO':'var(--r-medio)','ALTO':'var(--r-alto)','CRÍTICO':'var(--r-critico)' };
+
+  function renderResult(d){
+    $('mraPlanName').textContent = d.nombre_plan;
+    $('mraDiag').textContent     = d.diagnostico;
+    var rv = $('mraRiskValue');
+    rv.textContent = d.nivel_riesgo;
+    rv.style.color = RISK_COLORS[d.nivel_riesgo] || 'var(--r-medio)';
+    $('mraRisk').style.borderColor = RISK_COLORS[d.nivel_riesgo] || 'var(--mra-border)';
+    $('mraRiskJust').textContent = d.justificativa_riesgo;
+    $('mraE1Title').textContent  = d.etapa1.titulo;
+    $('mraE1Msg').textContent    = d.etapa1.mensaje_exacto;
+    $('mraE1Why').textContent    = d.etapa1.por_que_funciona;
+    $('mraResult').classList.add('show');
+    $('mraResult').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  $('mraRestart').addEventListener('click', function(){
+    step=1; answers={ tiempo:'', ruptura:'', ultimo:'', redes:'', objetivo:'' };
+    root.querySelectorAll('.mra-opt.selected').forEach(function(o){ o.classList.remove('selected'); });
+    root.querySelectorAll('.mra-input').forEach(function(o){ o.value=''; });
+    $('mraResult').classList.remove('show');
+    $('mraProgress').style.display=''; $('mraStage').style.display=''; $('mraNav').style.display='';
+    refreshUI();
+    root.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  /* =========================================================================
+   *  GENERADOR LOCAL (placeholder de la IA) — personaliza con las respuestas.
+   *  Mantiene la misma estructura JSON que devolverá el backend con Claude.
+   * ========================================================================= */
+  function generarPlan(r){
+    var t = r.redes.toLowerCase() + ' ' + r.ruptura.toLowerCase() + ' ' + r.ultimo.toLowerCase();
+    var has = function(arr){ return arr.some(function(w){ return t.indexOf(w)>-1; }); };
+
+    var tiempoScore = {menos1sem:0, '1a3sem':1, '1a2mes':2, mas2mes:3}[r.tiempo] || 1;
+    var score = tiempoScore;
+    if(has(['bloque','bloqueo','bloqueó'])) score += 2;
+    if(has(['saliendo','otro','nuevo','chico','alguien','novio','date','cita'])) score += 2;
+    if(has(['fotos','posteando','subiendo','historias','feliz','fiesta'])) score += 1;
+    if(has(['ella termin','me dejó','me dejo','me terminó','me termino'])) score += 1;
+    if(has(['nada','normal','vio mi','ve mis','responde','hablamos','me extraña'])) score -= 1;
+    if(r.objetivo === 'volver') score += 1;
+    if(r.objetivo === 'entender') score -= 1;
+
+    var nivel = score <= 1 ? 'BAJO' : score <= 3 ? 'MEDIO' : score <= 5 ? 'ALTO' : 'CRÍTICO';
+
+    var tiempoTxt = {menos1sem:'menos de una semana', '1a3sem':'1 a 3 semanas', '1a2mes':'1 a 2 meses', mas2mes:'más de dos meses'}[r.tiempo] || 'algunos días';
+    var objTxt = {volver:'recuperar la relación', reabrir:'reabrir el contacto sin presión', entender:'entender qué siente realmente ella'}[r.objetivo] || 'reconectar';
+
+    var nombres = {
+      BAJO:'Protocolo Reapertura Silenciosa',
+      MEDIO:'Estrategia Reconexión en 7 Días',
+      ALTO:'Plan Giro Emocional Acelerado',
+      CRÍTICO:'Protocolo Rescate · Ventana Crítica'
+    };
+
+    var justificativa = {
+      BAJO:'El vínculo sigue tibio y el canal está abierto: tienes margen para mover con calma.',
+      MEDIO:'Hay distancia real pero aún no es irreversible — cada mensaje cuenta a partir de ahora.',
+      ALTO:'Las señales muestran que ella está avanzando; la ventana se está cerrando.',
+      CRÍTICO:'Indicadores de cierre emocional y posible tercero: actuar hoy o perder la ventana.'
+    };
+
+    var bloqueada = has(['bloque','bloqueo','bloqueó']);
+    var msgHoy = bloqueada
+      ? 'No escribas todavía: hoy solo deja de aparecer por completo. Quita reacciones, deja de ver sus historias y desaparece 72h. El silencio es tu primer mensaje — rompe el patrón que ella espera de ti.'
+      : (r.objetivo === 'entender'
+          ? 'Hey, sin segundas intenciones — hoy pasó algo que me recordó a algo nuestro y me sacó una sonrisa. Solo quería que lo supieras. Espero que estés muy bien 🙂'
+          : 'Hey, me acordé de algo hoy y me reí solo. No quiero nada raro, solo me salió escribirte. ¿Cómo has estado?');
+
+    var porQue = bloqueada
+      ? 'El bloqueo busca una reacción tuya. Al desaparecer en vez de insistir, inviertes la dinámica: la ausencia genera más curiosidad que cualquier mensaje.'
+      : 'Es un mensaje de cero presión que reabre el canal sin pedir nada. Le devuelve la curiosidad y la deja cómoda para responder sin sentirse perseguida.';
+
+    var diag =
+      'Llevan ' + tiempoTxt + ' sin hablar y tu objetivo es ' + objTxt + '. ' +
+      (r.ruptura ? 'Por lo que cuentas («' + recorta(r.ruptura,70) + '»), ' : '') +
+      (bloqueada
+        ? 'el bloqueo no significa odio: es una barrera emocional para protegerse de algo que todavía la afecta. '
+        : 'el canal sigue abierto, lo que juega a tu favor si no lo fuerzas. ') +
+      'La prioridad ahora es romper tu patrón anterior y reaparecer desde un lugar nuevo, no desde la necesidad.';
+
+    return {
+      nombre_plan: nombres[nivel],
+      diagnostico: diag,
+      nivel_riesgo: nivel,
+      justificativa_riesgo: justificativa[nivel],
+      etapa1: {
+        titulo: 'HOY — Reapertura',
+        mensaje_exacto: msgHoy,
+        por_que_funciona: porQue
+      },
+      etapa2: { titulo:'En 48h — Calentamiento' },
+      etapa3: { titulo:'En 5-7 días — El Giro' }
+    };
+  }
+  function recorta(s,n){ s=s.trim(); return s.length>n ? s.slice(0,n)+'…' : s; }
+
+  refreshUI();
+})();
+</script>
+
 <!-- URGENCY -->
 <div class="urgency-section">
   <p class="urgency-text">
@@ -1747,67 +2256,6 @@ footer {
     <script>checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')</script>
     <!-- HOTMART - Sales Funnel Widget -->
     <p class="price-guarantee">🔒 Garantía de 7 días · Si no funciona, te devolvemos el dinero</p>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq-section">
-  <span class="section-label" style="display:block; text-align:center; margin-bottom:40px;">Preguntas frecuentes</span>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">
-      ¿Necesito instalar algo?
-      <span class="faq-icon">+</span>
-    </div>
-    <div class="faq-a">No. El Decoder funciona 100% dentro de Telegram. Si ya tienes Telegram instalado, es suficiente. Solo haces clic en el enlace del bot y empiezas de inmediato.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">
-      ¿Mis conversaciones son privadas?
-      <span class="faq-icon">+</span>
-    </div>
-    <div class="faq-a">Sí. Los mensajes que pegas en el bot no se almacenan ni se comparten con terceros. Cada análisis se procesa en tiempo real y no queda guardado en ninguna base de datos.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">
-      ¿Funciona para cualquier situación?
-      <span class="faq-icon">+</span>
-    </div>
-    <div class="faq-a">Sí. Ya sea que ella esté en silencio, enviando señales mixtas, con alguien más, o simplemente fría — el Decoder analiza el contexto específico y te da orientación adaptada a tu situación.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">
-      ¿Cómo cancelo la suscripción?
-      <span class="faq-icon">+</span>
-    </div>
-    <div class="faq-a">Con un solo mensaje dentro del bot. Sin formularios complicados, sin llamadas, sin letras pequeñas. Cancelas cuando quieras y no se te cobra el siguiente mes.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">
-      ¿Cuántos análisis puedo hacer por mes?
-      <span class="faq-icon">+</span>
-    </div>
-    <div class="faq-a">Ilimitados. Puedes analizar todos los mensajes que quieras sin restricciones. En los momentos críticos de una reconquista, necesitas herramientas sin límites.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">
-      Ya tengo El Código de la Reconquista. ¿Necesito el Decoder también?
-      <span class="faq-icon">+</span>
-    </div>
-    <div class="faq-a">El Código te da el método y la mentalidad. El Decoder lo ejecuta por ti en tiempo real. Son complementarios: El Código te enseña el por qué, el Decoder te dice exactamente qué hacer en cada mensaje específico que ella te manda. La mayoría de usuarios de El Código que usan el Decoder dicen que es el paso que les faltaba.</div>
-  </div>
-
-  <div class="faq-item">
-    <div class="faq-q" onclick="toggleFaq(this)">
-      ¿Qué pasa si no funciona en mi caso?
-      <span class="faq-icon">+</span>
-    </div>
-    <div class="faq-a">Tienes 7 días de garantía completa. Si sientes que el Decoder no te está ayudando, escribes un mensaje y te devolvemos el dinero sin preguntas. Sin formularios, sin esperas. El riesgo es cero de tu lado.</div>
   </div>
 </section>
 
