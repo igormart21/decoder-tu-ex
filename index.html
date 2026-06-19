@@ -1179,6 +1179,55 @@ footer {
 
 .price-anchor strong { color: var(--cream); }
 
+/* PROMESA FUERTE + STACK DE VALOR (oferta black) */
+.bold-promise {
+  max-width: 560px;
+  margin: 32px auto 0;
+  padding: 22px 26px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(79,70,229,0.06));
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  text-align: center;
+}
+.bold-promise-label {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.bold-promise p { font-size: 16px; line-height: 1.65; color: var(--cream); }
+.bold-promise strong { color: var(--white); }
+.bold-promise em { font-style: normal; display: block; margin-top: 10px; color: var(--gold); font-weight: 500; }
+
+.price-stack {
+  margin: 4px 0 22px;
+  padding: 18px 20px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--dim);
+  border-radius: 12px;
+  text-align: left;
+}
+.price-stack-row, .price-stack-total {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; color: var(--muted); padding: 7px 0;
+}
+.price-stack-row span:last-child { color: var(--dim); text-decoration: line-through; }
+.price-stack-total {
+  margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--dim);
+  font-size: 15px; color: var(--cream); font-weight: 500;
+}
+.price-stack-total span:last-child { color: var(--muted); text-decoration: line-through; }
+
+.price-today {
+  font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 4px;
+}
+.price-risk-reversal {
+  font-size: 13px; color: var(--muted); margin-top: 10px; font-style: italic;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   nav { padding: 16px 20px; }
@@ -1348,8 +1397,8 @@ footer {
 
 <!-- BENEFITS -->
 <section class="benefits-section">
-  <span class="section-label">Por qué funciona</span>
-  <h2>Todo lo que necesitas<em>para no fallar</em></h2>
+  <span class="section-label">El arsenal completo</span>
+  <h2>No es un bot.<em>Es tu ventaja injusta.</em></h2>
 
   <div class="benefits-grid">
     <div class="benefit-card">
@@ -1381,6 +1430,36 @@ footer {
       <span class="b-icon">📱</span>
       <div class="b-title">Directo en Telegram</div>
       <p class="b-desc">Sin apps que instalar. Sin registros complicados. Sólo abre Telegram y empieza. Disponible las 24 horas.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="b-icon">🕵️</span>
+      <div class="b-title">¿Sincera o te está probando?</div>
+      <p class="b-desc">El Decoder detecta cuándo su mensaje es honesto, cuándo es una prueba y cuándo te está manipulando para ver tu reacción. Dejas de caer en trampas.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="b-icon">🌡️</span>
+      <div class="b-title">Termómetro de interés en vivo</div>
+      <p class="b-desc">Mide si su interés sube o baja a lo largo de la conversación, mensaje a mensaje. Sabes exactamente cuándo avanzar y cuándo frenar.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="b-icon">📸</span>
+      <div class="b-title">Lee tus capturas de pantalla</div>
+      <p class="b-desc">Manda el screenshot de toda la conversación y el Decoder lo lee completo: el contexto, el tono, lo que ella no dijo. Análisis de la charla entera, no de un mensaje suelto.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="b-icon">🎭</span>
+      <div class="b-title">Simulador de reacción</div>
+      <p class="b-desc">Antes de enviar tu mensaje, el Decoder predice cómo va a reaccionar ella. Ensayas la jugada sin arriesgar el momento real.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="b-icon">🎙️</span>
+      <div class="b-title">Análisis de audios</div>
+      <p class="b-desc">¿Te dejó una nota de voz? Reenvíala y el Decoder la transcribe y descifra el tono real detrás de sus palabras — lo que su voz delata y el texto esconde.</p>
+    </div>
+    <div class="benefit-card">
+      <span class="b-icon">🚨</span>
+      <div class="b-title">Modo SOS</div>
+      <p class="b-desc">Te respondió y entraste en pánico. Pegas su mensaje y en segundos tienes la mejor jugada posible — la respuesta que la acerca, no la que la aleja.</p>
     </div>
   </div>
 </section>
@@ -2219,43 +2298,259 @@ footer {
 })();
 </script>
 
+<!-- ===== PILOTO AUTOMÁTICO (CO-PILOTO WHATSAPP) ===== -->
+<section id="piloto-wpp">
+  <span class="pa-eyebrow">Nuevo · La función que lo cambia todo</span>
+  <h2 class="pa-title">Piloto Automático <em>en tu WhatsApp</em></h2>
+  <p class="pa-sub">Cuando ella escriba, el Decoder responde <strong>con TU voz</strong> — tu tono, tu forma de hablar. Como si fueras tú en tu mejor momento: sin nervios, sin tardar 40 minutos, sin arruinar el momento. Tú apruebas, se envía.</p>
+
+  <div class="pa-phone">
+    <div class="pa-phone-head">
+      <div class="pa-avatar">💜</div>
+      <div class="pa-contact">
+        <span class="pa-name">Ella</span>
+        <span class="pa-status">en línea</span>
+      </div>
+    </div>
+
+    <div class="pa-chat" id="paChat">
+      <div class="pa-bubble pa-in" id="paHerBubble">Hola... vi que me escribiste. ¿Qué querías?</div>
+      <div class="pa-typing" id="paTyping" hidden><span></span><span></span><span></span></div>
+      <div class="pa-bubble pa-out" id="paOutBubble" hidden></div>
+    </div>
+
+    <div class="pa-composer">
+      <label class="pa-label">Pega lo que ella te escribió</label>
+      <textarea class="pa-input" id="paInput" rows="2">Hola... vi que me escribiste. ¿Qué querías?</textarea>
+
+      <label class="pa-label">¿Cómo hablas tú?</label>
+      <div class="pa-styles" id="paStyles">
+        <button type="button" class="pa-style selected" data-style="relajado">😎 Relajado</button>
+        <button type="button" class="pa-style" data-style="directo">🎯 Directo</button>
+        <button type="button" class="pa-style" data-style="humor">😏 Con humor</button>
+        <button type="button" class="pa-style" data-style="romantico">🔥 Intenso</button>
+      </div>
+
+      <button type="button" class="pa-send" id="paSend">Responder por mí ✦</button>
+      <div class="pa-result-actions" id="paActions" hidden>
+        <span class="pa-written">✓ Escrito con tu estilo · listo para enviar</span>
+        <button type="button" class="pa-copy" id="paCopy">📋 Copiar</button>
+        <button type="button" class="pa-again" id="paAgain">↻ Otra versión</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pa-cta">
+    <h3 class="pa-cta-title">Nunca más te quedes sin saber qué responder</h3>
+    <p class="pa-cta-sub">Conecta el Piloto Automático y deja que el Decoder te dé la respuesta perfecta — con tu voz — cada vez que ella escriba.</p>
+    <a href="#precio" class="pa-cta-btn">ACTIVAR EL PILOTO AUTOMÁTICO</a>
+    <p class="pa-cta-guarantee">✓ 7 días de garantía · ✓ Tú siempre apruebas antes de enviar · ✓ Cancela cuando quieras</p>
+  </div>
+</section>
+
+<style>
+/* ===== PILOTO AUTOMÁTICO — estilos aislados (#piloto-wpp / .pa-) ===== */
+#piloto-wpp{
+  --pa-grad:linear-gradient(135deg,#7c3aed,#4f46e5);
+  --pa-card:#111111; --pa-border:#222222; --pa-text:#f0eaf5; --pa-muted:#8a8190;
+  --pa-in:#1f1c22; --pa-out:#3a2d57;
+  padding:90px 20px; max-width:720px; margin:0 auto; text-align:center;
+}
+#piloto-wpp .pa-eyebrow{
+  display:inline-block; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:#a78bfa; border:1px solid rgba(124,58,237,.4); border-radius:99px; padding:6px 16px; margin-bottom:22px;
+}
+#piloto-wpp .pa-title{ font-family:'Cormorant Garamond',serif; font-weight:700; font-size:clamp(34px,6vw,52px); line-height:1.05; margin-bottom:16px; color:var(--pa-text); }
+#piloto-wpp .pa-title em{ font-style:italic; background:var(--pa-grad); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+#piloto-wpp .pa-sub{ color:var(--pa-muted); max-width:540px; margin:0 auto 40px; font-size:16px; line-height:1.65; }
+#piloto-wpp .pa-sub strong{ color:var(--pa-text); font-weight:500; }
+
+#piloto-wpp .pa-phone{
+  max-width:400px; margin:0 auto; background:var(--pa-card); border:1px solid var(--pa-border);
+  border-radius:26px; overflow:hidden; text-align:left; box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+#piloto-wpp .pa-phone-head{ display:flex; align-items:center; gap:12px; padding:14px 18px; background:#0d0d0d; border-bottom:1px solid var(--pa-border); }
+#piloto-wpp .pa-avatar{ width:40px; height:40px; border-radius:50%; background:var(--pa-grad); display:flex; align-items:center; justify-content:center; font-size:18px; }
+#piloto-wpp .pa-contact{ display:flex; flex-direction:column; }
+#piloto-wpp .pa-name{ font-size:15px; font-weight:600; color:var(--pa-text); }
+#piloto-wpp .pa-status{ font-size:12px; color:#22c55e; }
+
+#piloto-wpp .pa-chat{ padding:20px 16px; min-height:120px; display:flex; flex-direction:column; gap:10px; background:radial-gradient(circle at 30% 0%,rgba(124,58,237,.06),transparent 60%); }
+#piloto-wpp .pa-bubble{ max-width:80%; padding:11px 15px; border-radius:16px; font-size:14.5px; line-height:1.5; }
+#piloto-wpp .pa-in{ align-self:flex-start; background:var(--pa-in); color:var(--pa-text); border-bottom-left-radius:4px; }
+#piloto-wpp .pa-out{ align-self:flex-end; background:var(--pa-out); color:#fff; border-bottom-right-radius:4px; animation:pa-pop .3s ease; }
+@keyframes pa-pop{ from{ opacity:0; transform:translateY(8px) scale(.96); } to{ opacity:1; transform:none; } }
+#piloto-wpp .pa-typing{ align-self:flex-end; display:flex; gap:4px; padding:12px 16px; background:var(--pa-out); border-radius:16px; border-bottom-right-radius:4px; }
+#piloto-wpp .pa-typing span{ width:7px; height:7px; border-radius:50%; background:#cbb8f0; animation:pa-blink 1.2s infinite both; }
+#piloto-wpp .pa-typing span:nth-child(2){ animation-delay:.2s; } #piloto-wpp .pa-typing span:nth-child(3){ animation-delay:.4s; }
+@keyframes pa-blink{ 0%,60%,100%{ opacity:.25; } 30%{ opacity:1; } }
+
+#piloto-wpp .pa-composer{ padding:18px 16px 20px; border-top:1px solid var(--pa-border); background:#0d0d0d; }
+#piloto-wpp .pa-label{ display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#a78bfa; margin:0 0 8px; }
+#piloto-wpp .pa-input{ width:100%; padding:12px 14px; border-radius:10px; resize:vertical; background:#161616; border:1px solid var(--pa-border); color:var(--pa-text); font-family:inherit; font-size:14.5px; line-height:1.5; margin-bottom:16px; }
+#piloto-wpp .pa-input:focus{ outline:none; border-color:#7c3aed; }
+#piloto-wpp .pa-styles{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+#piloto-wpp .pa-style{ flex:1; min-width:calc(50% - 4px); padding:10px; border-radius:9px; background:#161616; border:1px solid var(--pa-border); color:var(--pa-text); font-family:inherit; font-size:13.5px; cursor:pointer; transition:all .2s; }
+#piloto-wpp .pa-style:hover{ border-color:#7c3aed; }
+#piloto-wpp .pa-style.selected{ border-color:#7c3aed; background:rgba(124,58,237,.16); box-shadow:0 0 0 1px #7c3aed inset; }
+#piloto-wpp .pa-send{ width:100%; background:var(--pa-grad); border:none; color:#fff; font-family:inherit; font-size:15px; font-weight:600; letter-spacing:.03em; padding:15px; border-radius:11px; cursor:pointer; transition:transform .15s; }
+#piloto-wpp .pa-send:hover{ transform:translateY(-2px); }
+#piloto-wpp .pa-result-actions{ display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:14px; }
+#piloto-wpp .pa-written{ flex:1; min-width:160px; font-size:12.5px; color:#22c55e; }
+#piloto-wpp .pa-copy,#piloto-wpp .pa-again{ background:#161616; border:1px solid var(--pa-border); color:var(--pa-text); font-family:inherit; font-size:12.5px; padding:8px 12px; border-radius:8px; cursor:pointer; }
+#piloto-wpp .pa-copy:hover,#piloto-wpp .pa-again:hover{ border-color:#7c3aed; }
+
+#piloto-wpp .pa-cta{ margin-top:40px; }
+#piloto-wpp .pa-cta-title{ font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:700; color:var(--pa-text); margin-bottom:8px; }
+#piloto-wpp .pa-cta-sub{ color:var(--pa-muted); font-size:15px; line-height:1.55; max-width:440px; margin:0 auto 24px; }
+#piloto-wpp .pa-cta-btn{ display:inline-block; background:var(--pa-grad); color:#fff; text-decoration:none; font-weight:700; letter-spacing:.05em; font-size:15px; padding:18px 40px; border-radius:12px; box-shadow:0 14px 40px rgba(124,58,237,.4); transition:transform .15s; }
+#piloto-wpp .pa-cta-btn:hover{ transform:translateY(-3px); }
+#piloto-wpp .pa-cta-guarantee{ color:var(--pa-muted); font-size:13px; margin-top:16px; }
+
+@media (max-width:600px){ #piloto-wpp{ padding:64px 16px; } }
+</style>
+
+<script>
+(function(){
+  /* PILOTO AUTOMÁTICO — demo del co-piloto (vanilla JS, autocontenido).
+     Genera la respuesta en el estilo del usuario a partir del mensaje de ella.
+     Cuando exista backend: reemplazar generarRespuesta() por un fetch a tu
+     endpoint, que llama a claude-sonnet-4-6 (la clave vive en el servidor).
+     La capa de envío sería tu integración de WhatsApp (ej. Evolution API). */
+  var root = document.getElementById('piloto-wpp');
+  if(!root) return;
+
+  var $ = function(id){ return document.getElementById(id); };
+  var estilo = 'relajado';
+
+  root.querySelectorAll('.pa-style').forEach(function(b){
+    b.addEventListener('click', function(){
+      root.querySelectorAll('.pa-style').forEach(function(o){ o.classList.remove('selected'); });
+      b.classList.add('selected'); estilo = b.dataset.style;
+    });
+  });
+
+  function tono(t){
+    t = t.toLowerCase();
+    if(/(te extraño|extraño|pienso en ti|te echo|te extrañé|te extrane)/.test(t)) return 'calida';
+    if(/(ocupada|no sé|no se|mejor así|mejor asi|déjame|dejame|no puedo|basta|no quiero|olvídalo|olvidalo)/.test(t)) return 'fria';
+    if(/\?/.test(t)) return 'pregunta';
+    return 'neutral';
+  }
+
+  var R = {
+    relajado:{
+      neutral:'Jaja apareciste justo cuando estaba en la mía 😄 todo bien por acá. ¿Vos cómo andás?',
+      fria:'Tranqui, no vengo a llenarte de mensajes. Solo me salió saludarte. Cuando tengas ganas, hablamos 👌',
+      calida:'Mirá qué casualidad, yo también me acordé de vos hoy. Me hizo bien leerte, la verdad.',
+      pregunta:'Buena esa jaja. Te respondo, pero primero contame vos: ¿qué andás haciendo?'
+    },
+    directo:{
+      neutral:'Te soy honesto: me gustó leerte. No te voy a perseguir, pero si te provoca un café un día, avisás.',
+      fria:'Entiendo, sin presión. Solo quería que supieras que pensé en vos. La pelota queda de tu lado.',
+      calida:'A mí también me pasa. No le doy más vueltas: me gustaría volver a verte.',
+      pregunta:'Te contesto directo: sí. ¿Y vos qué querés realmente?'
+    },
+    humor:{
+      neutral:'Mirá quién resucitó 👀 justo estaba por ganar una discusión conmigo mismo. ¿A qué debo el honor?',
+      fria:'Ok ok, recibido el frío polar 🥶 igual te mando calorcito. ¿Tregua?',
+      calida:'Ay no, ¿vos también? Y yo haciéndome el fuerte 😅 me alegró un montón leerte.',
+      pregunta:'Pregunta peligrosa esa jaja. Te la respondo en persona, ¿café?'
+    },
+    romantico:{
+      neutral:'No te voy a mentir: ver tu nombre en la pantalla me movió algo. No quiero apurar nada, solo me salió decírtelo.',
+      fria:'Respeto tu espacio, en serio. Pero hay cosas que no se fingen, y leerte me gustó.',
+      calida:'Yo también pienso en vos más de lo que debería admitir. Me encantaría que habláramos como antes.',
+      pregunta:'Esa me la guardo para decírtela mirándote a los ojos. ¿Nos vemos?'
+    }
+  };
+
+  function generarRespuesta(mensajeDeElla, estiloSel){   // ← swap por fetch al backend
+    return R[estiloSel][ tono(mensajeDeElla) ];
+  }
+
+  function run(){
+    var msg = $('paInput').value.trim() || 'Hola';
+    $('paHerBubble').textContent = msg;
+    $('paOutBubble').hidden = true;
+    $('paActions').hidden = true;
+    var typing = $('paTyping'); typing.hidden = false;
+    $('paChat').scrollTop = 9999;
+
+    setTimeout(function(){
+      typing.hidden = true;
+      var out = $('paOutBubble');
+      out.textContent = generarRespuesta(msg, estilo);
+      out.hidden = false;
+      $('paActions').hidden = false;
+    }, 1600);
+  }
+
+  $('paSend').addEventListener('click', run);
+  $('paAgain').addEventListener('click', run);
+  $('paCopy').addEventListener('click', function(){
+    var txt = $('paOutBubble').textContent;
+    if(navigator.clipboard) navigator.clipboard.writeText(txt);
+    var b=$('paCopy'); var o=b.textContent; b.textContent='✓ Copiado'; setTimeout(function(){ b.textContent=o; },1500);
+  });
+})();
+</script>
+
 <!-- URGENCY -->
 <div class="urgency-section">
   <p class="urgency-text">
-    ⚡ Oferta de lanzamiento activa —
-    <strong>precio especial disponible por tiempo limitado.</strong>
-    Tiempo restante: <span class="countdown" id="countdown">23:47:12</span>
+    ⚠️ Mientras lo piensas, <strong>ella ya está decidiendo sin ti.</strong>
+    El precio de lanzamiento sube cuando el cronómetro llegue a cero:
+    <span class="countdown" id="countdown">23:47:12</span>
   </p>
 </div>
 
 <!-- PRICING -->
 <section class="pricing-section" id="precio">
-  <span class="section-label">Acceso completo</span>
-  <h2>Una decisión.<em>Sin excusas.</em></h2>
+  <span class="section-label">La decisión</span>
+  <h2>Deja de adivinar.<em>Empieza a acertar.</em></h2>
 
   <div class="price-anchor">
-    <p>Un café por semana cuesta más que esto. La diferencia es que el café lo olvidas en una hora — <strong>el Decoder puede cambiar el resultado de una reconquista entera.</strong></p>
+    <p>Una reconquista no se pierde de un día para otro — se pierde en <strong>un solo mensaje mal enviado.</strong> El Decoder cuesta menos que una cena que ni vas a recordar. La diferencia es que esto puede ser la línea entre <strong>«volvimos»</strong> y <strong>«la perdí para siempre».</strong></p>
+  </div>
+
+  <!-- PROMESA FUERTE -->
+  <div class="bold-promise">
+    <span class="bold-promise-label">Nuestra promesa</span>
+    <p>La próxima vez que ella te escriba, vas a saber <strong>exactamente</strong> qué responder — sin dudar, sin arruinar el momento, sin quedarte mirando la pantalla 40 minutos. <em>Y si no sientes esa diferencia en 7 días, te devolvemos cada centavo.</em></p>
   </div>
 
   <div class="price-card">
-    <div class="price-badge">⚡ Precio de lanzamiento · Tiempo limitado</div>
+    <div class="price-badge">⚡ Precio de lanzamiento · Sube al llegar a cero</div>
     <div class="price-name">Decoder Pro</div>
+
+    <div class="price-stack">
+      <div class="price-stack-row"><span>Análisis emocional ilimitado</span><span>$39/mes</span></div>
+      <div class="price-stack-row"><span>Respuestas estratégicas listas</span><span>$29/mes</span></div>
+      <div class="price-stack-row"><span>Radar Social + lectura entre líneas</span><span>$25/mes</span></div>
+      <div class="price-stack-row"><span>Modo Reconquista Activa (plan 3 etapas)</span><span>$30/mes</span></div>
+      <div class="price-stack-total"><span>Valor real</span><span>$123/mes</span></div>
+    </div>
+
+    <div class="price-today">Hoy, precio de lanzamiento:</div>
     <div class="price-amount"><sup>$</sup>17</div>
-    <div class="price-period">USD por mes · Cancela cuando quieras</div>
+    <div class="price-period">USD por mes · Cancela cuando quieras, sin preguntas</div>
+
     <ul class="price-features">
       <li>Análisis ilimitados de mensajes</li>
       <li>Detección de emociones con porcentajes</li>
       <li>Respuesta estratégica incluida en cada análisis</li>
-      <li>Análisis de conversaciones completas</li>
+      <li>Radar Social + Modo Reconquista Activa</li>
       <li>Disponible 24/7 en Telegram</li>
-      <li>Acceso a actualizaciones del método</li>
+      <li>Acceso a todas las actualizaciones del método</li>
     </ul>
     <!-- HOTMART - Sales Funnel Widget -->
     <div id="hotmart-sales-funnel"></div>
     <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
     <script>checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')</script>
     <!-- HOTMART - Sales Funnel Widget -->
-    <p class="price-guarantee">🔒 Garantía de 7 días · Si no funciona, te devolvemos el dinero</p>
+    <p class="price-guarantee">🔒 Riesgo cero · 7 días de garantía total · Si no funciona, te devolvemos el 100%</p>
+    <p class="price-risk-reversal">El riesgo es todo nuestro. O te ayuda, o no pagas. Así de simple.</p>
   </div>
 </section>
 
